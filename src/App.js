@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import SignUp from './SignUp'
-import Birthday from './Birthday'
-import Location from './Location'
 import './SignUpForm.css'
 
 class App extends Component {
@@ -9,8 +7,6 @@ class App extends Component {
     return (
       <div>
         <SignUp/>
-        <Birthday/>
-        <Location/>
       </div>
     );
   }

@@ -4,32 +4,55 @@ class SignUp extends Component {
   constructor() {
     super()
 
-    this.state = {
+    this.state={
       firstName: "",
       lastName: "",
       password: "",
-      repeatPassword: ""
+      repeatPassword: "",
+      fName: false,
+      lName: false,
+      pass: false,
+      rpass: false
     }
-    this.handleFirstName=this.handleFirstName.bind(this)
-    this.handleLastName=this.handleLastName.bind(this)
-    this.handlePassword=this.handlePassword.bind(this)
-    this.handleRepeatPassword=this.handleRepeatPassword.bind(this)
 
   }
 
-  handleFirstName(e){
+  handleSubmit = () => {
+    if(this.state.firstName!==""){
+      console.log(this.state.firstName)
+      this.setState({fName:true})
+    }
+    if(this.state.firstName===""){
+      console.log("Blank")
+    }
+
+    if(this.state.lastName!==""){
+      this.setState({lName:true})
+    }
+    if(this.state.password!==""){
+      this.setState({pass:true})
+    }
+    if(this.state.repeatPassword!=="" && this.state.reapeatPassword===this.state.password){
+      this.setState({rpass:true})
+    }
+  }
+
+  handleFirstName = (e) => {
     this.setState({
       firstName: e.target.value})
   }
-  handleLastName(e){
+
+  handleLastName = (e) => {
     this.setState({
       lastName: e.target.value})
   }
-  handlePassword(e){
+
+  handlePassword = (e) => {
     this.setState({
       password: e.target.value})
   }
-  handleRepeatPassword(e){
+
+  handleRepeatPassword = (e) => {
     this.setState({
       repeatPassword: e.target.value})
   }
@@ -38,34 +61,50 @@ class SignUp extends Component {
     return (
       <div>
         <legend> Sign Up </legend>
-        <div className= "input-row">
+        <div className="input-row">
           <input
-          label ="First Name"
+          label="First Name"
           placeholder="First Name"
-          // value={this.state.firstName}
-          handler={this.handleFirstName}/>
+          value={this.state.firstName}
+          onChange={this.handleFirstName}/>
         </div>
-        <div className= "input-row">
+        <div className="input-row">
           <input
-          label ="Last Name"
+          label="Last Name"
           placeholder="Last Name"
           value={this.state.lastName}
-          handler={this.handleLastName}/>
+          onChange={this.handleLastName}/>
         </div>
-        <div className= "input-row">
+        <div className="input-row">
           <input
-          label ="Password"
+          label="Password"
           placeholder="Password"
           value={this.state.password}
-          handler={this.handlePassword}/>
+          onChange={this.handlePassword}/>
         </div>
-        <div className= "input-row">
+        <div className="input-row">
           <input
-          label ="Repeat Password"
+          label="Repeat Password"
           placeholder="Repeat Password"
           value={this.state.repeatPassword}
-          handler={this.handleRepeatPassword}/>
+          onChange={this.handleRepeatPassword}/>
         </div>
+        <legend> Birthday </legend>
+        <form className="input-row">
+          <input type="date" name="bday"/>
+        </form>
+        <div>
+        <button onClick={this.handleSubmit} className="signup-button"> SUBMIT </button>
+        <div className="error-message">
+          {
+            !this.fName? 'F EXISTS':''
+          }
+        </div>
+        <p className="error-message"></p>
+        <p className="error-message"></p>
+        <p className="error-message"></p>
+        </div>
+
 
       </div>
     );
