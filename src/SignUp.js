@@ -8,32 +8,29 @@ class SignUp extends Component {
       firstName: "",
       lastName: "",
       password: "",
-      repeatPassword: "",
-      fName: false,
-      lName: false,
-      pass: false,
-      rpass: false
+      repeatPassword:"",
+      noFName: true,
+      noLName: true,
+      noPass: true,
+      noRPass: true
     }
 
   }
 
   handleSubmit = () => {
-    if(this.state.firstName!==""){
-      console.log(this.state.firstName)
-      this.setState({fName:true})
-    }
     if(this.state.firstName===""){
-      console.log("Blank")
+      console.log(this.state.firstName)
+      this.setState({noFName:false})
     }
 
-    if(this.state.lastName!==""){
-      this.setState({lName:true})
+    if(this.state.lastName===""){
+      this.setState({noLName:false})
     }
-    if(this.state.password!==""){
-      this.setState({pass:true})
+    if(this.state.password===""){
+      this.setState({noPass:false})
     }
-    if(this.state.repeatPassword!=="" && this.state.reapeatPassword===this.state.password){
-      this.setState({rpass:true})
+    if(this.state.repeatPassword==="" && this.state.reapeatPassword!==this.state.password){
+      this.setState({noRPass:false})
     }
   }
 
@@ -61,6 +58,7 @@ class SignUp extends Component {
     return (
       <div>
         <legend> Sign Up </legend>
+
         <div className="input-row">
           <input
           label="First Name"
@@ -68,6 +66,12 @@ class SignUp extends Component {
           value={this.state.firstName}
           onChange={this.handleFirstName}/>
         </div>
+        <div className="error-message">
+        {
+          this.state.noFName === false? 'Input something':''
+        }
+        </div>
+
         <div className="input-row">
           <input
           label="Last Name"
@@ -75,6 +79,12 @@ class SignUp extends Component {
           value={this.state.lastName}
           onChange={this.handleLastName}/>
         </div>
+        <div className="error-message">
+          {
+            this.state.noLName === false? 'Input something':''
+          }
+        </div>
+
         <div className="input-row">
           <input
           label="Password"
@@ -82,6 +92,12 @@ class SignUp extends Component {
           value={this.state.password}
           onChange={this.handlePassword}/>
         </div>
+        <div className="error-message">
+          {
+            this.state.noPass === false? 'Input something':''
+          }
+        </div>
+
         <div className="input-row">
           <input
           label="Repeat Password"
@@ -89,21 +105,19 @@ class SignUp extends Component {
           value={this.state.repeatPassword}
           onChange={this.handleRepeatPassword}/>
         </div>
+        <div className="error-message">
+          {
+            this.state.noRPass === false? 'Input something':''
+          }
+        </div>
+
         <legend> Birthday </legend>
         <form className="input-row">
           <input type="date" name="bday"/>
         </form>
-        <div>
         <button onClick={this.handleSubmit} className="signup-button"> SUBMIT </button>
-        <div className="error-message">
-          {
-            !this.fName? 'F EXISTS':''
-          }
-        </div>
-        <p className="error-message"></p>
-        <p className="error-message"></p>
-        <p className="error-message"></p>
-        </div>
+
+
 
 
       </div>
