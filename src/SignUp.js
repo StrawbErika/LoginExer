@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './SignUpForm.css'
 
 class SignUp extends Component {
   constructor() {
@@ -12,9 +13,9 @@ class SignUp extends Component {
       noFName: true,
       noLName: true,
       noPass: true,
-      noRPass: true
+      noRPass: true,
+      eqRPass: true
     }
-
   }
 
   handleSubmit = () => {
@@ -22,15 +23,16 @@ class SignUp extends Component {
       console.log(this.state.firstName)
       this.setState({noFName:false})
     }
-
     if(this.state.lastName===""){
       this.setState({noLName:false})
     }
     if(this.state.password===""){
       this.setState({noPass:false})
     }
-    if(this.state.repeatPassword==="" && this.state.reapeatPassword!==this.state.password){
+    if(this.state.repeatPassword===""){
       this.setState({noRPass:false})
+    }else if(this.state.reapeatPassword!==this.state.password){
+      this.setState({eqRPass:false})
     }
   }
 
@@ -54,9 +56,9 @@ class SignUp extends Component {
       repeatPassword: e.target.value})
   }
 
-  render() { //none for render bec built in na sa render that they get access to this
+  render() {
     return (
-      <div>
+      <div className="body-placement">
         <legend> Sign Up </legend>
 
         <div className="input-row">
@@ -68,7 +70,7 @@ class SignUp extends Component {
         </div>
         <div className="error-message">
         {
-          this.state.noFName === false? 'Input something':''
+          this.state.noFName === false? 'First name is required':''
         }
         </div>
 
@@ -81,7 +83,7 @@ class SignUp extends Component {
         </div>
         <div className="error-message">
           {
-            this.state.noLName === false? 'Input something':''
+            this.state.noLName === false? 'Last name is required':''
           }
         </div>
 
@@ -94,7 +96,7 @@ class SignUp extends Component {
         </div>
         <div className="error-message">
           {
-            this.state.noPass === false? 'Input something':''
+            this.state.noPass === false? 'Password is required':''
           }
         </div>
 
@@ -107,19 +109,17 @@ class SignUp extends Component {
         </div>
         <div className="error-message">
           {
-            this.state.noRPass === false? 'Input something':''
+            this.state.noRPass === false? 'Please repeat password':''
+          }
+          {
+            this.state.eqRPass === false? "Passwords don't match":""
           }
         </div>
-
         <legend> Birthday </legend>
         <form className="input-row">
           <input type="date" name="bday"/>
         </form>
         <button onClick={this.handleSubmit} className="signup-button"> SUBMIT </button>
-
-
-
-
       </div>
     );
   }

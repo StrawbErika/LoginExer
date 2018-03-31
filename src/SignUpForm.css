@@ -1,3 +1,7 @@
+#body-placement{
+  background-color: RED;
+}
+
 .input-row {
   margin-top: 10px;
 }
@@ -17,6 +21,7 @@
 
 .error-message {
   color: red;
+  float: right;
   margin-left: 20px;
 }
 
