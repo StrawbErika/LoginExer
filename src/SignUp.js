@@ -10,17 +10,18 @@ class SignUp extends Component {
       lastName: "",
       password: "",
       repeatPassword:"",
+      birthday: "",
       noFName: true,
       noLName: true,
       noPass: true,
       noRPass: true,
-      eqRPass: true
+      eqRPass: true,
+      noBirthday: true
     }
   }
 
   handleSubmit = () => {
     if(this.state.firstName===""){
-      console.log(this.state.firstName)
       this.setState({noFName:false})
     }
     if(this.state.lastName===""){
@@ -31,9 +32,23 @@ class SignUp extends Component {
     }
     if(this.state.repeatPassword===""){
       this.setState({noRPass:false})
-    }else if(this.state.reapeatPassword!==this.state.password){
+    }else if(this.state.repeatPassword!==this.state.password){
       this.setState({eqRPass:false})
     }
+    if(this.state.birthday===""){
+      this.setState({noBirthday:false})
+    }else{
+      var splitted=this.state.birthday.split("-");
+      var age = 2018-splitted[0];
+      if(age < 18){
+        this.setState({noBirthday:false})
+      }
+    }
+  }
+
+  handleBirthday = (e) => {
+    this.setState({
+      birthday: e.target.value})
   }
 
   handleFirstName = (e) => {
@@ -66,12 +81,14 @@ class SignUp extends Component {
           label="First Name"
           placeholder="First Name"
           value={this.state.firstName}
-          onChange={this.handleFirstName}/>
-        </div>
-        <div className="error-message">
-        {
-          this.state.noFName === false? 'First name is required':''
-        }
+          onChange={this.handleFirstName}
+          className="input"/>
+
+          <div className="error-message">
+          {
+            this.state.noFName === false? 'First name is required':''
+          }
+          </div>
         </div>
 
         <div className="input-row">
@@ -79,12 +96,14 @@ class SignUp extends Component {
           label="Last Name"
           placeholder="Last Name"
           value={this.state.lastName}
-          onChange={this.handleLastName}/>
-        </div>
-        <div className="error-message">
+          onChange={this.handleLastName}
+          className="input"/>
+
+          <div className="error-message">
           {
             this.state.noLName === false? 'Last name is required':''
           }
+          </div>
         </div>
 
         <div className="input-row">
@@ -92,12 +111,15 @@ class SignUp extends Component {
           label="Password"
           placeholder="Password"
           value={this.state.password}
-          onChange={this.handlePassword}/>
-        </div>
-        <div className="error-message">
+          onChange={this.handlePassword}
+          className="input"
+          type="password"/>
+
+          <div className="error-message">
           {
             this.state.noPass === false? 'Password is required':''
           }
+          </div>
         </div>
 
         <div className="input-row">
@@ -105,21 +127,37 @@ class SignUp extends Component {
           label="Repeat Password"
           placeholder="Repeat Password"
           value={this.state.repeatPassword}
-          onChange={this.handleRepeatPassword}/>
-        </div>
-        <div className="error-message">
+          onChange={this.handleRepeatPassword}
+          className="input"
+          type="password"/>
+
+          <div className="error-message">
           {
             this.state.noRPass === false? 'Please repeat password':''
           }
           {
             this.state.eqRPass === false? "Passwords don't match":""
           }
+          </div>
         </div>
         <legend> Birthday </legend>
-        <form className="input-row">
-          <input type="date" name="bday"/>
-        </form>
-        <button onClick={this.handleSubmit} className="signup-button"> SUBMIT </button>
+        <div className="input-row">
+          <input
+          className="input"
+          type="date"
+          name="bday"
+          value={this.state.birthday}
+          onChange={this.handleBirthday}/>
+
+          <div className="error-message">
+          {
+            this.state.noBirthday === false? 'You have to be at least 18 to sign up':''
+          }
+          </div>
+
+        </div>
+
+        <button onClick={this.handleSubmit} id="signup-button"> SUBMIT </button>
       </div>
     );
   }

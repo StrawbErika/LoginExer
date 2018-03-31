@@ -1,9 +1,11 @@
-#body-placement{
-  background-color: RED;
-}
+.body-placement{
 
+}
 .input-row {
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  flexbox-direction: row;
 }
 
 .input {
@@ -21,7 +23,6 @@
 
 .error-message {
   color: red;
-  float: right;
   margin-left: 20px;
 }
 
