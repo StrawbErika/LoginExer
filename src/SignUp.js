@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './SignUpForm.css'
-
+import {provinces} from './provinces'
 class SignUp extends Component {
   constructor() {
     super()
@@ -8,15 +8,22 @@ class SignUp extends Component {
     this.state={
       firstName: "",
       lastName: "",
+
       password: "",
       repeatPassword:"",
+
       birthday: "",
+      province: "",
+      municipalities: "",
+
       noFName: true,
       noLName: true,
       noPass: true,
       noRPass: true,
       eqRPass: true,
-      noBirthday: true
+      noBirthday: true,
+
+      noProvince: true
     }
   }
 
@@ -44,6 +51,19 @@ class SignUp extends Component {
         this.setState({noBirthday:false})
       }
     }
+    if(this.state.province===""){
+      this.setState({noProvince:false})
+    }
+  }
+
+  handleProvince = (e) => {
+    this.setState({
+      province: e.target.value})
+  }
+
+  handleMunicipalities = (e) => {
+    this.setState({
+      municipalities: e.target.value})
   }
 
   handleBirthday = (e) => {
@@ -154,8 +174,26 @@ class SignUp extends Component {
             this.state.noBirthday === false? 'You have to be at least 18 to sign up':''
           }
           </div>
-
         </div>
+        <div className="input-row">
+          <select onChange={this.handleProvince}>
+            provinces.map((province) => {
+              return(
+                  <div>
+                    <option> {province.name} </option>
+                  </div>
+              )
+            }
+              // <option> Hello </option>
+          </select>
+
+          <div className="error-message">
+          {
+            this.state.province === false? 'You have to be at least 18 to sign up':''
+          }
+          </div>
+        </div>
+
 
         <button onClick={this.handleSubmit} id="signup-button"> SUBMIT </button>
       </div>
