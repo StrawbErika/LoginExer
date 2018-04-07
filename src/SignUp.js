@@ -13,7 +13,7 @@ class SignUp extends Component {
       repeatPassword:"",
 
       birthday: "",
-      province: "",
+      province: null,
       municipalities: "",
 
       noFName: true,
@@ -51,12 +51,14 @@ class SignUp extends Component {
         this.setState({noBirthday:false})
       }
     }
-    if(this.state.province===""){
+    console.log(this.state.province)
+    if(this.state.province===null){
       this.setState({noProvince:false})
     }
   }
 
   handleProvince=(e) => {
+    console.log(e.target.value);
     this.setState({
       province: e.target.value})
   }
@@ -177,18 +179,37 @@ class SignUp extends Component {
           </div>
         </div>
         <div className="input-row">
-          <select onChange={this.handleProvince}>
+          <select placeholder="Province" onChange={this.handleProvince}>
             {
-              provinces.map((province, index) => {
-                return(<option key={province.id}>{province.name} </option>)
-
+              provinces.map((province) => {
+                return(<option key={province.id} value={province.id}>{province.name} </option>)
               })
             }
           </select>
 
           <div className="error-message">
           {
-            this.state.province === false? 'You have to be at least 18 to sign up':''
+            this.state.province === false? 'olla':''
+          }
+          </div>
+        </div>
+
+        <div className="input-row">
+          <select onChange={this.handleMunicipalities}>
+            {
+                this.state.province !== null ?
+                provinces[this.state.province].municipalities.map((municipality, index) => {
+                  return(<option key={index} value={municipality[index]}>{municipality[index]} </option>)
+                })
+                : <option>Municipality </option>
+
+              }
+            }
+          </select>
+
+          <div className="error-message">
+          {
+            this.state.province === false? 'olla':''
           }
           </div>
         </div>
