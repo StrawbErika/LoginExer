@@ -27,7 +27,7 @@ class SignUp extends Component {
     }
   }
 
-  handleSubmit = () => {
+  handleSubmit=() => {
     if(this.state.firstName===""){
       this.setState({noFName:false})
     }
@@ -46,7 +46,7 @@ class SignUp extends Component {
       this.setState({noBirthday:false})
     }else{
       var splitted=this.state.birthday.split("-");
-      var age = 2018-splitted[0];
+      var age=2018-splitted[0];
       if(age < 18){
         this.setState({noBirthday:false})
       }
@@ -56,37 +56,38 @@ class SignUp extends Component {
     }
   }
 
-  handleProvince = (e) => {
+  handleProvince=(e) => {
     this.setState({
       province: e.target.value})
   }
 
-  handleMunicipalities = (e) => {
+  handleMunicipalities=(e) => {
     this.setState({
       municipalities: e.target.value})
   }
 
-  handleBirthday = (e) => {
+  handleBirthday=(e) => {
     this.setState({
       birthday: e.target.value})
   }
 
-  handleFirstName = (e) => {
+  handleFirstName=(e) => {
+    console.log(this.province);
     this.setState({
       firstName: e.target.value})
   }
 
-  handleLastName = (e) => {
+  handleLastName=(e) => {
     this.setState({
       lastName: e.target.value})
   }
 
-  handlePassword = (e) => {
+  handlePassword=(e) => {
     this.setState({
       password: e.target.value})
   }
 
-  handleRepeatPassword = (e) => {
+  handleRepeatPassword=(e) => {
     this.setState({
       repeatPassword: e.target.value})
   }
@@ -177,14 +178,12 @@ class SignUp extends Component {
         </div>
         <div className="input-row">
           <select onChange={this.handleProvince}>
-            provinces.map((province) => {
-              return(
-                  <div>
-                    <option> {province.name} </option>
-                  </div>
-              )
+            {
+              provinces.map((province, index) => {
+                return(<option key={province.id}>{province.name} </option>)
+
+              })
             }
-              // <option> Hello </option>
           </select>
 
           <div className="error-message">
