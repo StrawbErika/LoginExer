@@ -51,14 +51,12 @@ class SignUp extends Component {
         this.setState({noBirthday:false})
       }
     }
-    console.log(this.state.province)
     if(this.state.province===null){
       this.setState({noProvince:false})
     }
   }
 
   handleProvince=(e) => {
-    console.log(e.target.value);
     this.setState({
       province: e.target.value})
   }
@@ -74,7 +72,6 @@ class SignUp extends Component {
   }
 
   handleFirstName=(e) => {
-    console.log(this.province);
     this.setState({
       firstName: e.target.value})
   }
@@ -179,27 +176,23 @@ class SignUp extends Component {
           </div>
         </div>
         <div className="input-row">
-          <select placeholder="Province" onChange={this.handleProvince}>
+          <select className="dropdown" onChange={this.handleProvince}>
+            <option> Province </option>
             {
-              provinces.map((province) => {
-                return(<option key={province.id} value={province.id}>{province.name} </option>)
+              provinces.map((province, index) => {
+                return(<option  key={province.id} value={province.id}>{province.name} </option>)
               })
             }
           </select>
 
-          <div className="error-message">
-          {
-            this.state.province === false? 'olla':''
-          }
-          </div>
         </div>
 
         <div className="input-row">
-          <select onChange={this.handleMunicipalities}>
+          <select className="dropdown" onChange={this.handleMunicipalities}>
             {
                 this.state.province !== null ?
                 provinces[this.state.province].municipalities.map((municipality, index) => {
-                  return(<option key={index} value={municipality[index]}>{municipality[index]} </option>)
+                  return(<option key={index} value={municipality}>{municipality} </option>)
                 })
                 : <option>Municipality </option>
 
@@ -207,15 +200,10 @@ class SignUp extends Component {
             }
           </select>
 
-          <div className="error-message">
-          {
-            this.state.province === false? 'olla':''
-          }
-          </div>
         </div>
 
 
-        <button onClick={this.handleSubmit} id="signup-button"> SUBMIT </button>
+        <button onClick={this.handleSubmit}  className="input-row" id="signup-button"> SUBMIT </button>
       </div>
     );
   }
